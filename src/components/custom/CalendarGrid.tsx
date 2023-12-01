@@ -10,9 +10,14 @@ function CalendarGrid() {
 
   return (
     <div className="text-white grid grid-cols-7">
-      {generateMonthDays(year, month).map((dayDetails: DayObject) => (
-        <DayCell dayDetails={dayDetails} />
-      ))}
+      {generateMonthDays(year, month).map(
+        (dayDetails: DayObject, index: number) => {
+          if (index < 7) {
+            return <DayCell dayDetails={dayDetails} isStartingSeven={true} />;
+          } else
+            return <DayCell dayDetails={dayDetails} isStartingSeven={false} />;
+        }
+      )}
     </div>
   );
 }
