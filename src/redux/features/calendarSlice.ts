@@ -15,6 +15,7 @@ export interface CalendarState {
   selectedMonth: number;
   selectedDate: string;
   selectedYear: number;
+  isSidebar: boolean;
 }
 
 const initialState: CalendarState = {
@@ -22,6 +23,7 @@ const initialState: CalendarState = {
   selectedDate: dayjs().format("DD-MM-YYYY"),
   selectedMonth: dayjs().month(),
   selectedYear: dayjs().year(),
+  isSidebar: false,
 };
 
 export const calendarSlice = createSlice({
@@ -30,6 +32,12 @@ export const calendarSlice = createSlice({
   reducers: {
     decrementYear: (state) => {
       state.selectedYear = state.selectedYear - 1;
+    },
+    incrementYear: (state) => {
+      state.selectedYear = state.selectedYear + 1;
+    },
+    changeMonth: (state, { payload }) => {
+      state.selectedMonth = payload.value;
     },
     addEvent: (state, { payload }) => {
       const { event } = payload;
@@ -40,10 +48,14 @@ export const calendarSlice = createSlice({
         state.events[event.date] = [event];
       }
     },
+    switchSidebar: (state) => {
+      state.isSidebar = !state.isSidebar;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { decrementYear, addEvent } = calendarSlice.actions;
+export const { decrementYear, addEvent, switchSidebar, incrementYear,changeMonth } =
+  calendarSlice.actions;
 
 export default calendarSlice.reducer;

@@ -37,7 +37,7 @@ function DayCell({
   const [isAddEvent,setIsAddEvent]=useState(false)
   return (
     <Popover open={isAddEvent} onOpenChange={setIsAddEvent}>
-      <div className="min-h-[120px] border border-slate-200 p-4 bg-zinc-900 ">
+      <div className="min-h-[130px] border border-slate-200 p-4 bg-zinc-900 ">
         <div>
           {isStartingSeven ? (
             <p className="text-center text-sm text-zinc-300">
