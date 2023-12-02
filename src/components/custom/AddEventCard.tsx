@@ -33,7 +33,7 @@ function EventCard({
     <motion.div
       animate={{ scale: 1 }}
       initial={{ scale: 0.5 }}
-      className="z-10 w-[250px] min-h-[275px] bg-zinc-950 border  border-slate-200 rounded-xl p-4"
+      className="z-10 w-[270px] min-h-[275px] bg-zinc-900 border border-slate-300 shadow-2xl p-5"
     >
       <div className="grid gap-4">
         <div className="space-y-2">
