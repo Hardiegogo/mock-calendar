@@ -6,9 +6,6 @@ import {
   PopoverTrigger,
 } from "@radix-ui/react-popover";
 import { ListPlusIcon } from "lucide-react";
-// import { Input } from "../ui/input";
-// import { Label } from "../ui/label";
-// import { motion } from "framer-motion";
 import EventCard from "./AddEventCard";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";

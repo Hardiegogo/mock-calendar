@@ -1,6 +1,5 @@
 import { DayObject, generateMonthDays } from "@/lib/utils";
 import { RootState } from "@/redux/store";
-import React from "react";
 import { useSelector } from "react-redux";
 import DayCell from "./DayCell";
 import { AnimatePresence, motion } from "framer-motion";

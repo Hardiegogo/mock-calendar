@@ -3,13 +3,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Calendar } from "../ui/calendar";
-import { DayPicker } from "react-day-picker";
 
 function Sidebar() {
   const isSideBar = useSelector((state: RootState) => state.calendar.isSidebar);
 
   const [date, setDate] = useState<Date | undefined>();
-  console.log(date)
+  console.log(date);
 
   return (
     <AnimatePresence mode="wait">

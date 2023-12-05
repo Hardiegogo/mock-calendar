@@ -68,6 +68,7 @@ export const calendarSlice = createSlice({
         (listEvent) => listEvent.id === event.id
       );
       state.events[event.date][eventIndex] = { ...event };
+      localStorage.setItem("events", JSON.stringify(state.events));
     },
     switchSidebar: (state) => {
       state.isSidebar = !state.isSidebar;

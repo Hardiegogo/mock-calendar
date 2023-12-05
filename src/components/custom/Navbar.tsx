@@ -7,7 +7,6 @@ import {
 import { RootState } from "@/redux/store";
 import dayjs from "dayjs";
 import {
-  ChevronDownCircle,
   ChevronLeftCircle,
   ChevronRightCircle,
   ChevronsLeftIcon,
