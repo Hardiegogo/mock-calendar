@@ -4,23 +4,48 @@ import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { useDispatch } from "react-redux";
-import { addEvent } from "@/redux/features/calendarSlice";
+import {
+  IEvent,
+  addEvent,
+  editEventAction,
+} from "@/redux/features/calendarSlice";
+import { v4 as uuidv4 } from "uuid";
 
 function EventCard({
   date,
   setIsAddEvent,
+  editEvent,
+  event,
 }: {
   date: string;
   setIsAddEvent: React.Dispatch<React.SetStateAction<boolean>>;
+  editEvent: boolean;
+  event?: IEvent;
 }) {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState(editEvent === true ? event?.title : "");
+  const [description, setDescription] = useState(
+    editEvent === true ? event?.description : ""
+  );
   const dispatch = useDispatch();
 
   const saveEventHandler: React.MouseEventHandler<HTMLButtonElement> = () => {
     dispatch(
       addEvent({
         event: {
+          id: uuidv4(),
+          title,
+          description,
+          date,
+        },
+      })
+    );
+    setIsAddEvent(false);
+  };
+  const editEventHandler: React.MouseEventHandler<HTMLButtonElement> = () => {
+    dispatch(
+      editEventAction({
+        event: {
+          id: event?.id,
           title,
           description,
           date,
@@ -37,7 +62,9 @@ function EventCard({
     >
       <div className="grid gap-4">
         <div className="space-y-2">
-          <h4 className="font-medium leading-none text-center">Add Event</h4>
+          <h4 className="font-medium leading-none text-center">
+            {editEvent ? "Edit event" : "Add Event"}
+          </h4>
         </div>
         <div className="grid gap-4">
           <div className="grid grid-cols-3 items-center gap-4">
@@ -72,12 +99,21 @@ function EventCard({
         </div> */}
         </div>
         <div>
-          <Button
-            className="bg-white text-zinc-950 hover:bg-zinc-300 w-full"
-            onClick={saveEventHandler}
-          >
-            Submit
-          </Button>
+          {editEvent === false ? (
+            <Button
+              className="bg-white text-zinc-950 hover:bg-zinc-300 w-full"
+              onClick={saveEventHandler}
+            >
+              Submit
+            </Button>
+          ) : (
+            <Button
+              className="bg-white text-zinc-950 hover:bg-zinc-300 w-full"
+              onClick={editEventHandler}
+            >
+              Update
+            </Button>
+          )}
         </div>
       </div>
     </motion.div>
