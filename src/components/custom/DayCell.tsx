@@ -55,7 +55,7 @@ function DayCell({
             <PopoverTrigger>
               <ListPlusIcon size={15} className="justify-self-end" />
             </PopoverTrigger>
-            <PopoverContent>
+            <PopoverContent side="right" avoidCollisions={true}>
               <EventCard
                 date={date}
                 setIsAddEvent={setIsAddEvent}
@@ -66,7 +66,7 @@ function DayCell({
         </div>
         <main className="mt-2 flex flex-col gap-1">
           {events?.map((eventInfo: IEvent) => (
-            <EventItem eventInfo={eventInfo} key={eventInfo.id}/>
+            <EventItem eventInfo={eventInfo} key={eventInfo.id} />
           ))}
         </main>
       </div>
