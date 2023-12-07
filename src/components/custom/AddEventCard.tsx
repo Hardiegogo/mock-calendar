@@ -90,13 +90,20 @@ function EventCard({
               }}
             />
           </div>
-          {/* <div className="flex flex-col gap-2">
-          <Label htmlFor="maxWidth">Start time</Label>
-
-          <div>
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="maxWidth">Start time</Label>
             <input type="time" name="" id="" className="text-black" />
           </div>
-        </div> */}
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="maxWidth">End time</Label>
+            <input
+              type="time"
+              name=""
+              id=""
+              className="text-black"
+              onChange={(e) => console.log(e.target.value)}
+            />
+          </div>
         </div>
         <div>
           {editEvent === false ? (
