@@ -26,7 +26,6 @@ function EventCard({
   const [description, setDescription] = useState(
     editEvent === true ? event?.description : ""
   );
-  const [startTime, SetStartTime] = useState("");
   const dispatch = useDispatch();
 
   const saveEventHandler: React.MouseEventHandler<HTMLButtonElement> = () => {
