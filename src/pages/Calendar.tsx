@@ -1,7 +1,7 @@
-import CalendarGrid from "@/components/custom/CalendarGrid";
 import Navbar from "@/components/custom/Navbar";
 import Sidebar from "@/components/custom/Sidebar";
-// import CalendarSidebar from "@/components/custom/CalendarSidebar";
+import CalendarGrid from "@/components/custom/calendar/CalendarGrid";
+
 
 function Calendar() {
   return (

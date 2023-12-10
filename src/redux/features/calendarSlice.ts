@@ -7,6 +7,9 @@ export interface IEvent {
   title: string;
   date: string;
   description?: string;
+  startTime: string;
+  endTime: string;
+  color: string;
 }
 
 export interface CalendarState {
@@ -17,6 +20,7 @@ export interface CalendarState {
   selectedDate: string;
   selectedYear: number;
   isSidebar: boolean;
+  selectedEvent: IEvent;
 }
 
 const getEvents = () => {
@@ -31,6 +35,7 @@ const initialState: CalendarState = {
   selectedMonth: dayjs().month(),
   selectedYear: dayjs().year(),
   isSidebar: false,
+  selectedEvent: {},
 };
 
 export const calendarSlice = createSlice({
@@ -42,6 +47,9 @@ export const calendarSlice = createSlice({
     },
     incrementYear: (state) => {
       state.selectedYear = state.selectedYear + 1;
+    },
+    changeYear: (state, { payload }) => {
+      state.selectedYear = payload.value;
     },
     changeMonth: (state, { payload }) => {
       state.selectedMonth = payload.value;
@@ -73,6 +81,9 @@ export const calendarSlice = createSlice({
     switchSidebar: (state) => {
       state.isSidebar = !state.isSidebar;
     },
+    setSelectedEvent: (state, { payload }) => {
+      state.selectedEvent = { ...payload };
+    },
   },
 });
 
@@ -82,9 +93,11 @@ export const {
   addEvent,
   switchSidebar,
   incrementYear,
+  changeYear,
   changeMonth,
   deleteEvent,
   editEventAction,
+  setSelectedEvent,
 } = calendarSlice.actions;
 
 export default calendarSlice.reducer;
