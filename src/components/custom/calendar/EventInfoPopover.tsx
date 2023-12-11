@@ -1,4 +1,4 @@
-import { IEvent, deleteEvent, setSelectedEvent } from "@/redux/features/calendarSlice";
+import { IEvent, deleteEvent } from "@/redux/features/calendarSlice";
 import dayjs from "dayjs";
 import { motion } from "framer-motion";
 import { PenLineIcon, PencilIcon, TrashIcon } from "lucide-react";
@@ -16,9 +16,11 @@ function convertDateFormat(inputDateString: string) {
 function EventInfoPopover({
   eventInfo,
   setIsAddEvent,
+  onlyInfo,
 }: {
   eventInfo: IEvent;
   setIsAddEvent: React.Dispatch<React.SetStateAction<boolean>>;
+  onlyInfo?: true;
 }) {
   const { startTime, endTime, title, description, date, color, id } = eventInfo;
   const dispatch = useDispatch();
@@ -30,22 +32,30 @@ function EventInfoPopover({
       animate={{ scale: 1, opacity: 1, x: 0 }}
       initial={{ scale: 0.5, opacity: 0, x: 100 }}
       transition={{ duration: 0.08, type: "tween" }}
-      className="bg-zinc-900 p-4 w-90 border border-white rounded-md"
+      className="bg-zinc-900 p-4 w-90 border border-white rounded-md max-w-md"
     >
-      <header className="flex justify-end">
-        <div className="flex gap-2 items-center">
-          <TrashIcon
-            size={15}
-            className="cursor-pointer"
-            onClick={deleteEventHandler}
-          />
+      {onlyInfo ? (
+        ""
+      ) : (
+        <header className="flex justify-end">
+          <div className="flex gap-2 items-center">
+            <TrashIcon
+              size={15}
+              className="cursor-pointer"
+              onClick={deleteEventHandler}
+            />
 
-          <PencilIcon size={15} className="cursor-pointer" onClick={()=>{
-            // dispatch(setSelectedEvent(eventInfo))
-            // setIsAddEvent(true)
-          }} />
-        </div>
-      </header>
+            <PencilIcon
+              size={15}
+              className="cursor-pointer"
+              onClick={() => {
+                // dispatch(setSelectedEvent(eventInfo))
+                setIsAddEvent(true);
+              }}
+            />
+          </div>
+        </header>
+      )}
       <div className="flex gap-2 items-center mt-1">
         <div
           className="w-4 h-4 rounded-full"
@@ -63,8 +73,10 @@ function EventInfoPopover({
         <p className="text-sm font-light">{startTime + " - " + endTime}</p>
       </div>
       {description?.length ? (
-        <div className="mt-2 flex gap-2 items-center">
-          <PenLineIcon size={15} />
+        <div className="mt-2 flex gap-2 items-start w-full">
+          <div>
+            <PenLineIcon size={15} />
+          </div>
           <p className="text-xs font-light">{description}</p>
         </div>
       ) : (

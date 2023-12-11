@@ -28,10 +28,12 @@ function DayCell({
 
   return (
     <Dialog>
-      <div className="min-h-[130px] border border-slate-200 p-4 bg-zinc-900 ">
+      <div className="min-h-[130px] border-[0.5px] border-slate-200 p-4 bg-zinc-900 ">
         <div>
           {isStartingSeven ? (
-            <p className="text-center text-sm text-zinc-300">
+            <p
+              className="text-center text-sm text-zinc-300 cursor-pointer"
+            >
               {dayObj.format("dddd")}
             </p>
           ) : (
@@ -57,31 +59,29 @@ function DayCell({
             </PopoverContent>
           </Popover>
         </div>
-        <main className="mt-2 flex flex-col gap-1">
+        <main className=" flex flex-col">
           {events?.length
             ? giveSortedEvents(events)
-                ?.slice(0, 3)
+                ?.slice(0, 2)
                 ?.map((eventInfo: IEvent) => (
-                  <CellEventItem
-                    eventInfo={eventInfo}
-                    key={eventInfo.id}
-                    setIsAddEvent={setIsAddEvent}
-                  />
+                  <CellEventItem eventInfo={eventInfo} key={eventInfo.id} />
                 ))
             : ""}
-          {events?.length > 3 ? (
-            <p className="text-xs"> + {events.length - 3} more</p>
-          ) : (
-            ""
-          )}
+          <DialogTrigger>
+            {events?.length > 2 ? (
+              <p className="text-xs pl-1 mt-1 w-full  hover:bg-zinc-700 hover:rounded-md py-[1px] cursor-pointer text-left">
+                {" "}
+                + {events.length - 2} more
+              </p>
+            ) : (
+              ""
+            )}
+          </DialogTrigger>
         </main>
       </div>
 
-      <DialogContent className="bg-zinc-800 text-slate-50">
-        <DayView
-          dayDetails={dayDetails}
-          events={giveSortedEvents(events)}
-        />
+      <DialogContent className="bg-zinc-900 text-slate-50">
+        <DayView dayDetails={dayDetails} events={giveSortedEvents(events)} />
       </DialogContent>
     </Dialog>
   );

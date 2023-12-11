@@ -1,19 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Label } from "../../ui/label";
 import { Input } from "../../ui/input";
 import { Button } from "../../ui/button";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   IEvent,
   addEvent,
   editEventAction,
-  setSelectedEvent,
 } from "@/redux/features/calendarSlice";
 import { v4 as uuidv4 } from "uuid";
 import { z } from "zod";
 import { eventColors } from "./constants";
-import { RootState } from "@/redux/store";
 
 const EventInputSchema = z.object({
   title: z.string().min(3).max(300),
@@ -28,12 +26,13 @@ function EventCard({
   date,
   setIsAddEvent,
   editEvent,
+  event,
 }: {
   date: string;
   setIsAddEvent: React.Dispatch<React.SetStateAction<boolean>>;
   editEvent: boolean;
+  event?: IEvent;
 }) {
-  const event = useSelector((state: RootState) => state.calendar.selectedEvent);
   const [title, setTitle] = useState(editEvent === true ? event?.title : "");
   const [description, setDescription] = useState(
     editEvent === true ? event?.description : ""
@@ -43,8 +42,10 @@ function EventCard({
   const [selectedColor, setSelectedColor] = useState(
     editEvent ? event?.color : "white"
   );
+  // const [isRepeatEvent, setIsRepeatEvent] = useState(false);
   const [errors, setErrors] =
     useState<z.inferFlattenedErrors<typeof EventInputSchema>>();
+
   const dispatch = useDispatch();
 
   const saveEventHandler = (type: string) => {
@@ -72,6 +73,7 @@ function EventCard({
                 startTime,
                 endTime,
                 color: selectedColor,
+                // repeatingEvent: isRepeatEvent,
               },
             })
           );
@@ -87,6 +89,7 @@ function EventCard({
                 startTime,
                 endTime,
                 color: selectedColor,
+                // repeatingEvent: isRepeatEvent,
               },
             })
           );
@@ -176,6 +179,16 @@ function EventCard({
             })}
           </div>
         </div>
+        {/* <div className="mt-2 flex gap-2 items-center">
+          <input
+            type="checkbox"
+            name=""
+            id="recurring"
+            checked={isRepeatEvent}
+            onChange={() => setIsRepeatEvent(!isRepeatEvent)}
+          />
+          <Label htmlFor="recurring">Repeat event</Label>
+        </div> */}
         <div>
           {errors?.fieldErrors && (
             <p className="text-xs text-red-400 text-center mb-1">

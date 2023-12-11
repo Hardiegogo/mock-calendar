@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import dayjs from "dayjs";
-// import type { PayloadAction } from "@reduxjs/toolkit";
+
 
 export interface IEvent {
   id: string;
@@ -20,7 +20,6 @@ export interface CalendarState {
   selectedDate: string;
   selectedYear: number;
   isSidebar: boolean;
-  selectedEvent: IEvent;
 }
 
 const getEvents = () => {
@@ -35,7 +34,6 @@ const initialState: CalendarState = {
   selectedMonth: dayjs().month(),
   selectedYear: dayjs().year(),
   isSidebar: false,
-  selectedEvent: {},
 };
 
 export const calendarSlice = createSlice({
@@ -81,9 +79,6 @@ export const calendarSlice = createSlice({
     switchSidebar: (state) => {
       state.isSidebar = !state.isSidebar;
     },
-    setSelectedEvent: (state, { payload }) => {
-      state.selectedEvent = { ...payload };
-    },
   },
 });
 
@@ -97,7 +92,6 @@ export const {
   changeMonth,
   deleteEvent,
   editEventAction,
-  setSelectedEvent,
 } = calendarSlice.actions;
 
 export default calendarSlice.reducer;
