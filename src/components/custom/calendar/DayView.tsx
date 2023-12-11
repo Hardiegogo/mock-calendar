@@ -10,6 +10,7 @@ function DayView({
   events: IEvent[] | null;
 }) {
   const { dayObj } = dayDetails;
+
   return (
     <div>
       <h1 className="text-xl">{dayObj.format("DD MMMM YYYY")}</h1>
