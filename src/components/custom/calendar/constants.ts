@@ -1,3 +1,5 @@
+import { z } from "zod";
+
 export const eventColors = [
   "#3498db",
   "#2ecc71",
@@ -7,3 +9,12 @@ export const eventColors = [
   "#FFFFFF",
   "#1abc9c",
 ];
+
+export const EventInputSchema = z.object({
+  title: z.string().min(3).max(300),
+  description: z.string().optional(),
+  date: z.string().min(6),
+  color: z.string(),
+  startTime: z.string().min(5),
+  endTime: z.string().min(5),
+});

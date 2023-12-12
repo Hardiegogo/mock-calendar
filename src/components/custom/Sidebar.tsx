@@ -7,7 +7,6 @@ import dayjs from "dayjs";
 import { changeMonth, changeYear } from "@/redux/features/calendarSlice";
 
 function Sidebar() {
-  //check2
   const isSideBar = useSelector((state: RootState) => state.calendar.isSidebar);
   const dispatch = useDispatch();
 
@@ -15,13 +14,12 @@ function Sidebar() {
   console.log(date);
   useEffect(() => {
     if (date) {
-
       dispatch(
         changeMonth({
           value: dayjs(date).get("month"),
         })
       );
-      
+
       dispatch(
         changeYear({
           value: dayjs(date).get("year"),
@@ -34,9 +32,9 @@ function Sidebar() {
     <AnimatePresence mode="wait" key={1}>
       {isSideBar && (
         <motion.div
-          className="min-h-screen overflow-hidden"
+          className="min-h-full overflow-hidden"
           initial={{ x: -100, opacity: 0, width: 0 }}
-          animate={{ x: 0, opacity: 1, width: "20%" }}
+          animate={{ x: 0, opacity: 1, width: "fit-content" }}
           exit={{ x: -100, opacity: 0, width: 0 }}
           transition={{ type: "tween", duration: 0.3 }}
         >

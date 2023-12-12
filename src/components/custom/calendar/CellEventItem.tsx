@@ -14,10 +14,10 @@ const CellEventItem = ({ eventInfo,dayDate }: { eventInfo: IEvent,dayDate:string
         <PopoverTrigger className="w-full">
           <div className="flex gap-2 items-center hover:bg-zinc-700 hover:rounded-md py-[1px] px-1 cursor-pointer w-full">
             <div
-              className="w-[7px] h-[7px] rounded-[50%]"
+              className="min-w-[7px] min-h-[7px] rounded-[50%]"
               style={{ background: eventInfo.color }}
             ></div>
-            <p className="text-xs">{title}</p>
+            <p className="text-xs text-left truncate text-ellipsis">{title}</p>
           </div>
         </PopoverTrigger>
         <PopoverContent side="left" sideOffset={10}>

@@ -40,7 +40,7 @@ function Navbar() {
     }
   };
   return (
-    <div className="p-4 text-center text-white border-white border-b min-w-full flex min-h-[70px] items-center">
+    <div className="p-4 text-center text-white min-w-full flex min-h-[70px] items-center overflow-hidden">
       <div className="flex gap-4">
         <MenuIcon
           className="cursor-pointer"

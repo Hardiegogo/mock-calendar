@@ -4,15 +4,15 @@ import { motion } from "framer-motion";
 import { PenLineIcon, PencilIcon, TrashIcon } from "lucide-react";
 import { useDispatch } from "react-redux";
 
-function convertDateFormat(inputDateString: string) {
+function convertDateFormatMMDDYYYY(inputDateString: string) {
   // Split the input date string into day, month, and year
   const [day, month, year] = inputDateString.split("-");
 
   // Create a new date string with the desired format 'MM-DD-YYYY'
   const outputDateString = `${month}-${day}-${year}`;
-
   return outputDateString;
 }
+
 function EventInfoPopover({
   eventInfo,
   setIsAddEvent,
@@ -24,7 +24,7 @@ function EventInfoPopover({
   onlyInfo?: true;
   dayDate: string;
 }) {
-  const { startTime, endTime, title, description, date, color, id } = eventInfo;
+  const { startTime, endTime, title, description, date, color } = eventInfo;
   const dispatch = useDispatch();
   const deleteEventHandler = () => {
     dispatch(deleteEvent({ event: eventInfo, dayDate: dayDate }));
@@ -67,9 +67,9 @@ function EventInfoPopover({
       </div>
       <div className="mt-1 ml-6 flex gap-2 items-center">
         <p className="text-sm font-light">
-          {dayjs(convertDateFormat(date), { format: "DD-MM-YYYY" }).format(
-            "dddd, MMMM DD"
-          )}
+          {dayjs(convertDateFormatMMDDYYYY(date), {
+            format: "DD-MM-YYYY",
+          }).format("dddd, MMMM DD")}
         </p>
         <div className="w-[1px] h-[12px] bg-white"></div>
         <p className="text-sm font-light">{startTime + " - " + endTime}</p>

@@ -48,3 +48,19 @@
     --ring: 224.3 76.3% 48%;
   }
 }
+
+html {
+  background: #000;
+}
+
+@media screen and (max-width: 1080px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  html {
+    font-size: 12px;
+  }
+}
