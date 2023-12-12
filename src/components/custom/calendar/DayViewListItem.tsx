@@ -16,12 +16,11 @@ import EventInfoPopover from "./EventInfoPopover";
 import { useState } from "react";
 
 const EventListItem = ({ event }: { event: IEvent }) => {
-  const { date, id } = event;
   const [isAddEvent, setIsAddEvent] = useState(false);
   const dispatch = useDispatch();
 
   const deleteEventHandler = () => {
-    dispatch(deleteEvent({ id, date }));
+    dispatch(deleteEvent({ event }));
   };
 
   const dialogClose = () => {

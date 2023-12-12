@@ -47,3 +47,13 @@ export const generateMonthDays = (year: number, month: number) => {
 
   return daysArray;
 };
+
+export function convertDateFormatYYYYMMDD(inputDate:string) {
+  // Split the inputDate into day, month, and year parts
+  const [day, month, year] = inputDate.split('-');
+
+  // Create a new date string in the required format (YYYY-MM-DD)
+  const convertedDate = `${year}-${month}-${day}`;
+
+  return convertedDate;
+}

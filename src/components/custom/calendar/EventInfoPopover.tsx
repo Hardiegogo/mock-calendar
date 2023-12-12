@@ -17,15 +17,17 @@ function EventInfoPopover({
   eventInfo,
   setIsAddEvent,
   onlyInfo,
+  dayDate,
 }: {
   eventInfo: IEvent;
   setIsAddEvent: React.Dispatch<React.SetStateAction<boolean>>;
   onlyInfo?: true;
+  dayDate: string;
 }) {
   const { startTime, endTime, title, description, date, color, id } = eventInfo;
   const dispatch = useDispatch();
   const deleteEventHandler = () => {
-    dispatch(deleteEvent({ id, date }));
+    dispatch(deleteEvent({ event: eventInfo, dayDate: dayDate }));
   };
   return (
     <motion.div
