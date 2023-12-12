@@ -1,30 +1,18 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Personal Calendar built with React + ShadCN UI + Redux toolkit
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Tech Stack
 
-- Configure the top-level `parserOptions` property like this:
+**Client:** React, Redux toolkit, Tailwind CSS, ShadCN UI, Zod, Framer.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+**Data persistence:** Local Storage
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Screenshots
+<img width="1512" alt="Screenshot 2023-12-12 at 7 11 53 PM" src="https://github.com/Hardiegogo/mock-calendar/assets/51075671/04e343a8-2ab1-444c-bb03-7952b45d75fe">
+
+<img width="1512" alt="Screenshot 2023-12-12 at 7 10 47 PM" src="https://github.com/Hardiegogo/mock-calendar/assets/51075671/d0d6f136-05c7-4895-9711-732e16948221">
+
+<img width="1512" alt="Screenshot 2023-12-12 at 7 13 14 PM" src="https://github.com/Hardiegogo/mock-calendar/assets/51075671/2667dc35-13a0-472e-af5d-a60a40f6a61e">
