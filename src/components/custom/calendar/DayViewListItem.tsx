@@ -23,10 +23,6 @@ const EventListItem = ({ event,dayDate }: { event: IEvent,dayDate:string }) => {
     dispatch(deleteEvent({ event,dayDate }));
   };
 
-  const dialogClose = () => {
-    console.log("ff");
-  };
-
   return (
     <div className="text-md flex justify-between">
       <HoverCard>
@@ -60,7 +56,6 @@ const EventListItem = ({ event,dayDate }: { event: IEvent,dayDate:string }) => {
             <PencilIcon
               size={15}
               className="cursor-pointer"
-              onClick={dialogClose}
             />
           </PopoverTrigger>
           <PopoverContent side="right" sideOffset={10}>

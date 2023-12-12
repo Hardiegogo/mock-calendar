@@ -10,17 +10,10 @@ import {
   editEventAction,
 } from "@/redux/features/calendarSlice";
 import { v4 as uuidv4 } from "uuid";
+import { EventInputSchema, eventColors } from "./constants";
 import { z } from "zod";
-import { eventColors } from "./constants";
-
-const EventInputSchema = z.object({
-  title: z.string().min(3).max(300),
-  description: z.string().optional(),
-  date: z.string().min(6),
-  color: z.string(),
-  startTime: z.string().min(5),
-  endTime: z.string().min(5),
-});
+import dayjs from "dayjs";
+import { convertDateFormatYYYYMMDD } from "@/lib/utils";
 
 function EventCard({
   date,
@@ -49,6 +42,28 @@ function EventCard({
     useState<z.inferFlattenedErrors<typeof EventInputSchema>>();
 
   const dispatch = useDispatch();
+
+  const handleEndTimeChange: React.ChangeEventHandler<HTMLInputElement> = (
+    e
+  ) => {
+    e.preventDefault();
+    if (e.target.value) {
+      const sDate = dayjs(convertDateFormatYYYYMMDD(date) + " " + startTime, {
+        format: "HH:mm",
+      });
+      const eDate = dayjs(
+        convertDateFormatYYYYMMDD(date) + " " + e.target.value,
+        { format: "HH:mm" }
+      );
+      if (eDate.isAfter(sDate)) {
+        setEndTime(e.target.value);
+      } else {
+        setEndTime("");
+      }
+    } else {
+      setEndTime("");
+    }
+  };
 
   const saveEventHandler = (type: string) => {
     try {
@@ -159,7 +174,8 @@ function EventCard({
               id=""
               className="text-black"
               value={endTime}
-              onChange={(e) => setEndTime(e.target.value)}
+              onChange={(e) => handleEndTimeChange(e)}
+              disabled={startTime === ""}
             />
           </div>
         </div>

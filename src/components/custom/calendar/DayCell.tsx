@@ -18,9 +18,11 @@ import { giveCellEvents } from "@/lib/giveCellEvents";
 function DayCell({
   dayDetails,
   isStartingSeven,
+  cellHeight,
 }: {
   dayDetails: DayObject;
   isStartingSeven: boolean;
+  cellHeight: number;
 }) {
   const { date, dayObj } = dayDetails;
   const events = useSelector((state: RootState) => state.calendar.events[date]);
@@ -28,10 +30,11 @@ function DayCell({
     (state: RootState) => state.calendar.events.repeatingEvents
   );
   const eventsToBeDisplayed = giveCellEvents(events, repeatingEvents, date);
+  const maxEvents = Math.floor(cellHeight / 18);
   const [isAddEvent, setIsAddEvent] = useState(false);
   return (
     <Dialog>
-      <div className="min-h-[130px] border-[0.5px] border-slate-200 p-4 bg-zinc-900 ">
+      <div className="min-h-[130px] h-full border-[0.5px] border-slate-200 p-4 bg-zinc-900 overflow-hidden flex flex-col">
         <div>
           {isStartingSeven ? (
             <p className="text-center text-sm text-zinc-300 cursor-pointer">
@@ -60,19 +63,23 @@ function DayCell({
             </PopoverContent>
           </Popover>
         </div>
-        <main className=" flex flex-col">
+        <main className="flex flex-col cellContainer h-full">
           {eventsToBeDisplayed && eventsToBeDisplayed?.length
             ? eventsToBeDisplayed
-                ?.slice(0, 2)
+                ?.slice(0, maxEvents)
                 ?.map((eventInfo: IEvent) => (
-                  <CellEventItem eventInfo={eventInfo} key={eventInfo.id} dayDate={date}/>
+                  <CellEventItem
+                    eventInfo={eventInfo}
+                    key={eventInfo.id}
+                    dayDate={date}
+                  />
                 ))
             : ""}
           <DialogTrigger>
-            {eventsToBeDisplayed && eventsToBeDisplayed?.length > 2 ? (
+            {eventsToBeDisplayed && eventsToBeDisplayed?.length > maxEvents ? (
               <p className="text-xs pl-1 mt-1 w-full  hover:bg-zinc-700 hover:rounded-md py-[1px] cursor-pointer text-left">
                 {" "}
-                + {eventsToBeDisplayed.length - 2} more
+                + {eventsToBeDisplayed.length - maxEvents} more
               </p>
             ) : (
               ""
