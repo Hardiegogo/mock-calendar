@@ -42,7 +42,9 @@ function EventCard({
   const [selectedColor, setSelectedColor] = useState(
     editEvent ? event?.color : "white"
   );
-  // const [isRepeatEvent, setIsRepeatEvent] = useState(false);
+  const [isRepeatEvent, setIsRepeatEvent] = useState(
+    editEvent ? event?.repeatingEvent : false
+  );
   const [errors, setErrors] =
     useState<z.inferFlattenedErrors<typeof EventInputSchema>>();
 
@@ -73,7 +75,7 @@ function EventCard({
                 startTime,
                 endTime,
                 color: selectedColor,
-                // repeatingEvent: isRepeatEvent,
+                repeatingEvent: isRepeatEvent,
               },
             })
           );
@@ -89,7 +91,7 @@ function EventCard({
                 startTime,
                 endTime,
                 color: selectedColor,
-                // repeatingEvent: isRepeatEvent,
+                repeatingEvent: isRepeatEvent,
               },
             })
           );
@@ -119,7 +121,7 @@ function EventCard({
             <Label htmlFor="width">Title</Label>
             <Input
               id="width"
-              defaultValue=""
+              type="text"
               className="col-span-2 h-8 text-zinc-950"
               value={title}
               onChange={(e) => {
@@ -174,12 +176,13 @@ function EventCard({
                   onClick={() => {
                     setSelectedColor(color);
                   }}
+                  key={color}
                 ></div>
               );
             })}
           </div>
         </div>
-        {/* <div className="mt-2 flex gap-2 items-center">
+        <div className="mt-2 flex gap-2 items-center">
           <input
             type="checkbox"
             name=""
@@ -187,8 +190,8 @@ function EventCard({
             checked={isRepeatEvent}
             onChange={() => setIsRepeatEvent(!isRepeatEvent)}
           />
-          <Label htmlFor="recurring">Repeat event</Label>
-        </div> */}
+          <Label htmlFor="recurring">Daily event</Label>
+        </div>
         <div>
           {errors?.fieldErrors && (
             <p className="text-xs text-red-400 text-center mb-1">

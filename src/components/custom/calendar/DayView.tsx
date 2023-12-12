@@ -17,7 +17,7 @@ function DayView({
       <h3 className="mt-4 text-lg">Events</h3>
       <div className="mt-4 flex flex-col gap-2">
         {events &&
-          events.map((event) => <EventListItem event={event} key={event.id} />)}
+          events.map((event) => <EventListItem event={event} key={event.id} dayDate={dayDetails.date}/>)}
       </div>
     </div>
   );

@@ -15,13 +15,12 @@ import {
 import EventInfoPopover from "./EventInfoPopover";
 import { useState } from "react";
 
-const EventListItem = ({ event }: { event: IEvent }) => {
-  const { date, id } = event;
+const EventListItem = ({ event,dayDate }: { event: IEvent,dayDate:string }) => {
   const [isAddEvent, setIsAddEvent] = useState(false);
   const dispatch = useDispatch();
 
   const deleteEventHandler = () => {
-    dispatch(deleteEvent({ id, date }));
+    dispatch(deleteEvent({ event,dayDate }));
   };
 
   const dialogClose = () => {
@@ -45,6 +44,7 @@ const EventListItem = ({ event }: { event: IEvent }) => {
             eventInfo={event}
             onlyInfo={true}
             setIsAddEvent={setIsAddEvent}
+            dayDate={dayDate}
           />
         </HoverCardContent>
       </HoverCard>

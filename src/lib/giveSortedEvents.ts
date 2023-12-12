@@ -1,11 +1,22 @@
 import { IEvent } from "@/redux/features/calendarSlice";
 import dayjs from "dayjs";
+import { convertDateFormatYYYYMMDD } from "./utils";
+import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 
-export const giveSortedEvents = (events: IEvent[]) => {
-  if (!events?.length) {
+dayjs.extend(isSameOrAfter);
+
+export const giveSortedEvents = (events: IEvent[] | null, date: string) => {
+  if (!events || !date) {
     return null;
   }
-  return [...events]?.sort((eventOne, eventTwo) => {
+  const filteredEvents = events.filter((event) => {
+    if (!event?.leaveDates?.includes(date)) {
+      return dayjs(convertDateFormatYYYYMMDD(date)).isSameOrAfter(
+        convertDateFormatYYYYMMDD(event.date)
+      );
+    } else return false;
+  });
+  return [...filteredEvents]?.sort((eventOne, eventTwo) => {
     const startOne = dayjs(eventOne.date + " " + eventOne.startTime, {
       format: "DD-MM-YYYY HH:mm",
     });

@@ -12,8 +12,8 @@ import { RootState } from "@/redux/store";
 import { IEvent } from "@/redux/features/calendarSlice";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import DayView from "./DayView";
-import { giveSortedEvents } from "@/lib/giveSortedEvents";
 import CellEventItem from "./CellEventItem";
+import { giveCellEvents } from "@/lib/giveCellEvents";
 
 function DayCell({
   dayDetails,
@@ -24,16 +24,17 @@ function DayCell({
 }) {
   const { date, dayObj } = dayDetails;
   const events = useSelector((state: RootState) => state.calendar.events[date]);
+  const repeatingEvents = useSelector(
+    (state: RootState) => state.calendar.events.repeatingEvents
+  );
+  const eventsToBeDisplayed = giveCellEvents(events, repeatingEvents, date);
   const [isAddEvent, setIsAddEvent] = useState(false);
-
   return (
     <Dialog>
       <div className="min-h-[130px] border-[0.5px] border-slate-200 p-4 bg-zinc-900 ">
         <div>
           {isStartingSeven ? (
-            <p
-              className="text-center text-sm text-zinc-300 cursor-pointer"
-            >
+            <p className="text-center text-sm text-zinc-300 cursor-pointer">
               {dayObj.format("dddd")}
             </p>
           ) : (
@@ -60,18 +61,18 @@ function DayCell({
           </Popover>
         </div>
         <main className=" flex flex-col">
-          {events?.length
-            ? giveSortedEvents(events)
+          {eventsToBeDisplayed && eventsToBeDisplayed?.length
+            ? eventsToBeDisplayed
                 ?.slice(0, 2)
                 ?.map((eventInfo: IEvent) => (
-                  <CellEventItem eventInfo={eventInfo} key={eventInfo.id} />
+                  <CellEventItem eventInfo={eventInfo} key={eventInfo.id} dayDate={date}/>
                 ))
             : ""}
           <DialogTrigger>
-            {events?.length > 2 ? (
+            {eventsToBeDisplayed && eventsToBeDisplayed?.length > 2 ? (
               <p className="text-xs pl-1 mt-1 w-full  hover:bg-zinc-700 hover:rounded-md py-[1px] cursor-pointer text-left">
                 {" "}
-                + {events.length - 2} more
+                + {eventsToBeDisplayed.length - 2} more
               </p>
             ) : (
               ""
@@ -81,7 +82,7 @@ function DayCell({
       </div>
 
       <DialogContent className="bg-zinc-900 text-slate-50">
-        <DayView dayDetails={dayDetails} events={giveSortedEvents(events)} />
+        <DayView dayDetails={dayDetails} events={eventsToBeDisplayed} />
       </DialogContent>
     </Dialog>
   );

@@ -20,10 +20,10 @@ function CalendarGrid() {
         {generateMonthDays(year, month).map(
           (dayDetails: DayObject, index: number) => {
             if (index < 7) {
-              return <DayCell dayDetails={dayDetails} isStartingSeven={true} />;
+              return <DayCell dayDetails={dayDetails} isStartingSeven={true} key={dayDetails.date} />;
             } else
               return (
-                <DayCell dayDetails={dayDetails} isStartingSeven={false} />
+                <DayCell dayDetails={dayDetails} isStartingSeven={false} key={dayDetails.date}/>
               );
           }
         )}

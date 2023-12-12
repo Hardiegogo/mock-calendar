@@ -5,7 +5,7 @@ import EventInfoPopover from "./EventInfoPopover";
 import EventCard from "./AddEventCard";
 import { useState } from "react";
 
-const CellEventItem = ({ eventInfo }: { eventInfo: IEvent }) => {
+const CellEventItem = ({ eventInfo,dayDate }: { eventInfo: IEvent,dayDate:string }) => {
   const { title } = eventInfo;
   const [isAddEvent, setIsAddEvent] = useState(false);
   return (
@@ -24,6 +24,7 @@ const CellEventItem = ({ eventInfo }: { eventInfo: IEvent }) => {
           <EventInfoPopover
             eventInfo={eventInfo}
             setIsAddEvent={setIsAddEvent}
+            dayDate={dayDate}
           />
         </PopoverContent>
       </Popover>
