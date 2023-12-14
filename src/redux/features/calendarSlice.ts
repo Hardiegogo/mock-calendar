@@ -34,7 +34,10 @@ const getEvents = () => {
     }
     localStorage.setItem("events", JSON.stringify(events));
     return events;
-  } else return {};
+  } else
+    return {
+      repeatingEvents: [],
+    };
 };
 
 getEvents();
