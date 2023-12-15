@@ -34,7 +34,7 @@ function DayCell({
   const [isAddEvent, setIsAddEvent] = useState(false);
   return (
     <Dialog>
-      <div className="min-h-[130px] h-full border-[0.5px] border-slate-200 p-4 bg-zinc-900 overflow-hidden flex flex-col">
+      <div className="min-h-[130px] h-full border-[0.5px] border-slate-400 p-4 bg-zinc-900 overflow-hidden flex flex-col">
         <div>
           {isStartingSeven ? (
             <p className="text-center text-sm text-zinc-300 cursor-pointer">
@@ -88,7 +88,7 @@ function DayCell({
         </main>
       </div>
 
-      <DialogContent className="bg-zinc-900 text-slate-50">
+      <DialogContent className="bg-zinc-900 border border-slate-400 text-slate-50">
         <DayView dayDetails={dayDetails} events={eventsToBeDisplayed} />
       </DialogContent>
     </Dialog>

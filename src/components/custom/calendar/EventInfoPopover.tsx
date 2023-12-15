@@ -34,7 +34,7 @@ function EventInfoPopover({
       animate={{ scale: 1, opacity: 1, x: 0 }}
       initial={{ scale: 0.5, opacity: 0, x: 100 }}
       transition={{ duration: 0.08, type: "tween" }}
-      className="bg-zinc-900 p-4 w-90 border border-white rounded-md max-w-md"
+      className="bg-zinc-900 p-4 w-90 border border-slate-400 rounded-md max-w-md"
     >
       {onlyInfo ? (
         ""

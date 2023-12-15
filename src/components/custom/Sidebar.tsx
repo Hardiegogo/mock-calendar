@@ -9,7 +9,6 @@ import { changeMonth, changeYear } from "@/redux/features/calendarSlice";
 function Sidebar() {
   const isSideBar = useSelector((state: RootState) => state.calendar.isSidebar);
   const dispatch = useDispatch();
-
   const [date, setDate] = useState<Date | undefined>();
   console.log(date);
   useEffect(() => {
@@ -42,7 +41,7 @@ function Sidebar() {
             mode="single"
             selected={date}
             onSelect={setDate}
-            className=" border animate-none"
+            className=" border border-slate-400 animate-none"
           />
         </motion.div>
       )}

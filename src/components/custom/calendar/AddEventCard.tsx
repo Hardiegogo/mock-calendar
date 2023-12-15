@@ -123,7 +123,7 @@ function EventCard({
       animate={{ scale: 1, opacity: 1, x: 0 }}
       initial={{ scale: 0.5, opacity: 0, x: -100 }}
       transition={{ duration: 0.08, type: "tween" }}
-      className="z-10 w-[270px] min-h-[275px] bg-zinc-900 border border-slate-300 shadow-2xl p-5 rounded-md"
+      className="z-10 w-[270px] min-h-[275px] bg-zinc-900 border border-slate-400 shadow-2xl p-5 rounded-md"
     >
       <div className="grid gap-4">
         <div className="space-y-2">
